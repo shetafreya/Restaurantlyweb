@@ -6,435 +6,7 @@
   <title>Restaurantly — Fine Dining</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --dark: #0d0d0d;
-      --dark2: #1a1a1a;
-      --dark3: #242424;
-      --cream: #f5f0e8;
-      --text-muted: #888;
-      --white: #fff;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Raleway', sans-serif;
-      background: var(--dark);
-      color: var(--white);
-      overflow-x: hidden;
-    }
-
-    /* ── TOP BAR ── */
-    .topbar {
-      background: #111;
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-      padding: 10px 0;
-    }
-    .topbar .inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; gap: 28px;
-      padding: 0 24px;
-    }
-    .topbar span { font-size: 13px; color: #aaa; letter-spacing: 0.5px; }
-    .topbar i { color: var(--gold); margin-right: 7px; font-size: 13px; }
-
-    /* ── NAVBAR ── */
-    nav {
-      background: rgba(13,13,13,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      position: sticky; top: 0; z-index: 999;
-      padding: 0 24px;
-    }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 70px;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px; font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 1px;
-      text-decoration: none;
-    }
-    .nav-links { display: flex; list-style: none; gap: 4px; }
-    .nav-links a {
-      color: #ccc; text-decoration: none;
-      font-size: 13px; font-weight: 500; letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 8px 14px; border-radius: 4px;
-      transition: color 0.3s;
-      position: relative;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links li { position: relative; }
-    .dropdown {
-      position: absolute; top: 100%; left: 0;
-      background: #1a1a1a;
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 6px; min-width: 160px;
-      display: none; flex-direction: column;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      overflow: hidden;
-    }
-    .nav-links li:hover .dropdown { display: flex; }
-    .dropdown a { padding: 12px 16px; border-radius: 0; font-size: 12px; }
-    .dropdown a:hover { background: rgba(201,168,76,0.1); }
-    .btn-book {
-      background: var(--gold);
-      color: #000 !important; font-weight: 600 !important;
-      padding: 10px 22px !important; border-radius: 4px !important;
-      letter-spacing: 1px !important;
-      transition: background 0.3s !important;
-    }
-    .btn-book:hover { background: var(--gold-light) !important; color: #000 !important; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600') center/cover no-repeat;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 120px;
-      background: linear-gradient(transparent, var(--dark));
-    }
-    .hero-content { position: relative; z-index: 1; padding: 0 20px; }
-    .hero-tag {
-      display: inline-block;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 11px; letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 6px 20px; border-radius: 2px;
-      margin-bottom: 28px;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(48px, 8vw, 90px);
-      font-weight: 700; line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 20px;
-    }
-    .hero h1 em { color: var(--gold); font-style: italic; }
-    .hero p {
-      font-size: 17px; color: #ccc;
-      max-width: 520px; margin: 0 auto 36px;
-      line-height: 1.7; font-weight: 300;
-    }
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--gold); color: #000;
-      padding: 14px 36px; border-radius: 4px;
-      font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-outline {
-      border: 1px solid rgba(255,255,255,0.4); color: #fff;
-      padding: 14px 36px; border-radius: 4px;
-      font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
-      text-transform: uppercase; text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* ── SECTION HEADER ── */
-    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .sec-header { text-align: center; margin-bottom: 60px; }
-    .sec-tag {
-      display: inline-block;
-      color: var(--gold); font-size: 13px;
-      letter-spacing: 3px; text-transform: uppercase;
-      margin-bottom: 14px; font-weight: 600;
-    }
-    .sec-tag::before, .sec-tag::after {
-      content: '✦'; margin: 0 10px; font-size: 9px;
-    }
-    .sec-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(30px, 4vw, 46px);
-      font-weight: 700; color: var(--white);
-    }
-    .sec-header p {
-      color: var(--text-muted); max-width: 500px;
-      margin: 16px auto 0; line-height: 1.7;
-    }
-    .gold-divider {
-      width: 60px; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 20px auto 0;
-    }
-
-    /* ── ABOUT SECTION ── */
-    .about { padding: 100px 0; }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-    .about-img { position: relative; }
-    .about-img img {
-      width: 100%; border-radius: 4px;
-      aspect-ratio: 4/3; object-fit: cover;
-      display: block;
-    }
-    .about-img .exp-badge {
-      position: absolute; bottom: -20px; right: -20px;
-      background: var(--gold); color: #000;
-      width: 110px; height: 110px; border-radius: 50%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .about-img .exp-badge span:first-child { font-size: 32px; line-height: 1; }
-    .about-img .exp-badge span:last-child { font-size: 11px; letter-spacing: 1px; }
-    .about-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 38px; margin-bottom: 20px; color: var(--white);
-    }
-    .about-text p { color: #aaa; line-height: 1.8; margin-bottom: 16px; }
-    .about-list { list-style: none; margin: 24px 0; }
-    .about-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      color: #ccc; margin-bottom: 12px; font-size: 14px; line-height: 1.6;
-    }
-    .about-list li i { color: var(--gold); margin-top: 3px; font-size: 12px; flex-shrink: 0; }
-
-    /* ── WHY US ── */
-    .why { padding: 80px 0; background: var(--dark2); }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 30px; margin-top: 60px;
-    }
-    .why-card {
-      background: var(--dark3);
-      border: 1px solid rgba(201,168,76,0.1);
-      border-radius: 8px; padding: 40px 32px;
-      text-align: center;
-      transition: all 0.3s; position: relative; overflow: hidden;
-    }
-    .why-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 2px; background: var(--gold);
-      transform: scaleX(0); transition: transform 0.3s;
-    }
-    .why-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-6px); }
-    .why-card:hover::before { transform: scaleX(1); }
-    .why-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px; color: rgba(201,168,76,0.15);
-      line-height: 1; margin-bottom: 16px; font-weight: 700;
-    }
-    .why-card h3 { color: var(--gold); font-size: 18px; margin-bottom: 12px; }
-    .why-card p { color: #888; font-size: 14px; line-height: 1.7; }
-
-    /* ── MENU ── */
-    .menu-sec { padding: 100px 0; }
-    .menu-tabs {
-      display: flex; justify-content: center; gap: 6px;
-      margin-bottom: 50px; flex-wrap: wrap;
-    }
-    .tab-btn {
-      padding: 10px 28px; background: transparent;
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #aaa; font-family: 'Raleway', sans-serif;
-      font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
-      cursor: pointer; border-radius: 4px; transition: all 0.3s;
-    }
-    .tab-btn:hover, .tab-btn.active {
-      background: var(--gold); border-color: var(--gold);
-      color: #000; font-weight: 600;
-    }
-    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-    .menu-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05);
-      transition: background 0.2s;
-    }
-    .menu-item:hover { background: rgba(201,168,76,0.04); }
-    .menu-item img {
-      width: 70px; height: 70px; border-radius: 4px; object-fit: cover; flex-shrink: 0;
-    }
-    .menu-info { flex: 1; min-width: 0; }
-    .menu-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-    .menu-top h4 { font-size: 15px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .menu-dots { flex: 1; border-bottom: 1px dotted rgba(255,255,255,0.15); min-width: 20px; margin: 0 10px 4px; }
-    .menu-price { color: var(--gold); font-weight: 700; font-size: 15px; white-space: nowrap; }
-    .menu-desc { color: #777; font-size: 12px; margin-top: 4px; line-height: 1.4; }
-
-    /* ── SPECIALS ── */
-    .specials { padding: 100px 0; background: var(--dark2); }
-    .specials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
-    .special-card {
-      background: var(--dark3); border-radius: 8px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .special-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
-    .special-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
-    .special-body { padding: 24px; }
-    .special-badge {
-      display: inline-block; background: var(--gold); color: #000;
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      padding: 4px 12px; border-radius: 2px; margin-bottom: 12px;
-    }
-    .special-body h3 { font-family: 'Playfair Display',serif; font-size: 20px; margin-bottom: 8px; }
-    .special-body p { color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
-    .special-footer { display: flex; justify-content: space-between; align-items: center; }
-    .special-price { color: var(--gold); font-size: 22px; font-weight: 700; font-family: 'Playfair Display',serif; }
-
-    /* ── TEAM ── */
-    .team { padding: 100px 0; }
-    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .team-card {
-      text-align: center;
-      background: var(--dark2);
-      border-radius: 8px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: transform 0.3s;
-    }
-    .team-card:hover { transform: translateY(-6px); }
-    .team-img-wrap { position: relative; overflow: hidden; }
-    .team-img-wrap img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform 0.5s; }
-    .team-card:hover .team-img-wrap img { transform: scale(1.05); }
-    .team-overlay {
-      position: absolute; inset: 0;
-      background: rgba(201,168,76,0.85);
-      display: flex; align-items: center; justify-content: center; gap: 16px;
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .team-card:hover .team-overlay { opacity: 1; }
-    .team-overlay a { color: #000; font-size: 18px; }
-    .team-body { padding: 20px 16px; }
-    .team-body h4 { font-family: 'Playfair Display',serif; font-size: 18px; margin-bottom: 4px; }
-    .team-body span { color: var(--gold); font-size: 13px; }
-
-    /* ── CONTACT ── */
-    .contact { padding: 100px 0; background: var(--dark2); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; }
-    .contact-map iframe { width: 100%; height: 300px; border-radius: 6px; border: 0; margin-bottom: 30px; filter: grayscale(40%) contrast(1.1); }
-    .contact-info { display: flex; flex-direction: column; gap: 20px; }
-    .contact-info-item {
-      display: flex; align-items: flex-start; gap: 16px;
-      padding: 20px; background: var(--dark3);
-      border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);
-    }
-    .contact-icon {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); font-size: 16px; flex-shrink: 0;
-    }
-    .contact-info-item h5 { font-size: 13px; color: var(--gold); margin-bottom: 4px; letter-spacing: 1px; text-transform: uppercase; }
-    .contact-info-item p { color: #aaa; font-size: 14px; line-height: 1.6; }
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-input, .form-textarea {
-      width: 100%; padding: 14px 18px;
-      background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px; color: #fff;
-      font-family: 'Raleway', sans-serif; font-size: 14px;
-      transition: border-color 0.3s; outline: none;
-    }
-    .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
-    .form-input::placeholder, .form-textarea::placeholder { color: #555; }
-    .form-textarea { resize: vertical; min-height: 140px; }
-    .btn-submit {
-      background: var(--gold); color: #000; border: none;
-      padding: 14px 36px; font-size: 13px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      border-radius: 4px; cursor: pointer;
-      font-family: 'Raleway', sans-serif;
-      transition: background 0.3s, transform 0.2s; align-self: flex-start;
-    }
-    .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-
-    /* ── FOOTER ── */
-    footer { background: #0a0a0a; border-top: 1px solid rgba(201,168,76,0.1); padding: 70px 0 0; }
-    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 50px; padding-bottom: 50px; }
-    .footer-brand .logo { display: block; margin-bottom: 16px; font-size: 28px; }
-    .footer-brand p { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 20px; }
-    .social-links { display: flex; gap: 10px; }
-    .social-link {
-      width: 38px; height: 38px; border-radius: 50%;
-      border: 1px solid rgba(201,168,76,0.3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); font-size: 15px; text-decoration: none;
-      transition: all 0.3s;
-    }
-    .social-link:hover { background: var(--gold); color: #000; border-color: var(--gold); }
-    .footer-col h4 {
-      font-family: 'Playfair Display',serif;
-      color: var(--gold); font-size: 17px; margin-bottom: 20px;
-      padding-bottom: 10px; border-bottom: 1px solid rgba(201,168,76,0.15);
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul li a { color: #777; text-decoration: none; font-size: 13px; transition: color 0.3s; }
-    .footer-col ul li a:hover { color: var(--gold); padding-left: 4px; }
-    .newsletter-text { color: #666; font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
-    .newsletter-form { display: flex; gap: 0; }
-    .newsletter-form input {
-      flex: 1; padding: 12px 16px;
-      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
-      border-right: none; border-radius: 4px 0 0 4px;
-      color: #fff; font-family: 'Raleway',sans-serif; font-size: 13px; outline: none;
-    }
-    .newsletter-form input:focus { border-color: var(--gold); }
-    .newsletter-form input::placeholder { color: #555; }
-    .newsletter-form button {
-      background: var(--gold); color: #000; border: none;
-      padding: 12px 18px; border-radius: 0 4px 4px 0;
-      cursor: pointer; font-size: 13px; font-weight: 700;
-      font-family: 'Raleway',sans-serif; transition: background 0.3s;
-    }
-    .newsletter-form button:hover { background: var(--gold-light); }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 20px 0; text-align: center;
-    }
-    .footer-bottom p { color: #444; font-size: 13px; }
-    .footer-bottom span { color: var(--gold); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-content > * { animation: fadeUp 0.8s ease both; }
-    .hero-tag { animation-delay: 0.1s; }
-    .hero h1 { animation-delay: 0.25s; }
-    .hero p { animation-delay: 0.4s; }
-    .hero-btns { animation-delay: 0.55s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .why-grid, .specials-grid { grid-template-columns: 1fr 1fr; }
-      .team-grid { grid-template-columns: 1fr 1fr; }
-      .menu-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 600px) {
-      .why-grid, .specials-grid, .team-grid, .footer-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .about-img .exp-badge { width: 90px; height: 90px; }
-    }
-  </style>
+  <link rel="stylesheet" href="restaurant.css">
 </head>
 <body>
 
@@ -483,6 +55,170 @@
       <a href="#book" class="btn-outline">Book a Table</a>
     </div>
   </div>
+</section>
+<!-- Book a table -->
+ <section class="Book" id="book">
+  <div class="book-outer">
+  <div class="section-wrap">
+  <div class="sec-header">
+    <div class="sec-tag">Reservations</div>
+    <h2>Book a Table</h2>
+    <div class="gold-divider"></div>
+    <p style="color:#888; margin-top:14px; font-size:14px;">We confirm your reservation within 2 hours. For same-day bookings, please call us directly.</p>
+  </div>
+
+  <div class="book-card">
+
+    <!-- FORM AREA -->
+    <div id="book-form-area">
+      <div class="book-form-grid">
+
+        <!-- Name -->
+        <div class="book-field-group">
+          <label class="book-label">Your Name</label>
+          <input id="b-name" class="book-input" type="text" placeholder="Full name">
+        </div>
+
+        <!-- Phone -->
+        <div class="book-field-group">
+          <label class="book-label">Phone Number</label>
+          <input id="b-phone" class="book-input" type="tel" placeholder="+1 555 000 0000">
+        </div>
+
+        <!-- Date -->
+        <div class="book-field-group">
+          <label class="book-label">Date</label>
+          <input id="b-date" class="book-input" type="date">
+        </div>
+
+        <!-- Time -->
+        <div class="book-field-group">
+          <label class="book-label">Time</label>
+          <select id="b-time" class="book-input book-select">
+            <option value="" disabled selected>Select time</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>1:00 PM</option>
+            <option>2:00 PM</option>
+            <option>6:00 PM</option>
+            <option>7:00 PM</option>
+            <option>7:30 PM</option>
+            <option>8:00 PM</option>
+            <option>8:30 PM</option>
+            <option>9:00 PM</option>
+            <option>9:30 PM</option>
+            <option>10:00 PM</option>
+          </select>
+        </div>
+
+      </div><!-- /book-form-grid -->
+
+      <!-- Guests -->
+      <div class="book-field-group">
+        <label class="book-label">Number of Guests</label>
+        <div class="book-guest-row">
+          <button class="book-g-btn" id="book-g-minus" type="button" aria-label="Remove guest">&#8722;</button>
+          <span class="book-g-count" id="book-g-count">2</span>
+          <span class="book-g-label">guests</span>
+          <button class="book-g-btn" id="book-g-plus" type="button" aria-label="Add guest">&#43;</button>
+        </div>
+      </div>
+
+      <!-- Occasion chips -->
+      <div class="book-field-group">
+        <label class="book-label">Occasion <span style="color:#666; font-weight:400; text-transform:none; letter-spacing:0;">(optional)</span></label>
+        <div class="book-chips">
+          <button class="book-chip" type="button" data-val="Birthday">&#127874; Birthday</button>
+          <button class="book-chip" type="button" data-val="Anniversary">&#128145; Anniversary</button>
+          <button class="book-chip" type="button" data-val="Business">&#128188; Business Dinner</button>
+          <button class="book-chip" type="button" data-val="Date Night">&#127863; Date Night</button>
+          <button class="book-chip" type="button" data-val="Celebration">&#129346; Celebration</button>
+        </div>
+      </div>
+
+      <!-- Special Requests -->
+      <div class="book-field-group">
+        <label class="book-label">Special Requests</label>
+        <textarea id="b-note" class="book-input book-textarea" rows="3" placeholder="Dietary restrictions, seating preferences, allergies&#8230;"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="book-submit-btn" id="book-submit" type="button">Reserve My Table</button>
+      <p class="book-note">We will confirm your reservation via phone within 2 hours.</p>
+    </div><!-- /book-form-area -->
+
+    <!-- SUCCESS SCREEN (hidden by default) -->
+    <div class="book-success" id="book-success-area" style="display:none;">
+      <div class="book-success-icon">&#128557;</div>
+      <h3 class="book-success-title">Reservation Confirmed!</h3>
+      <p class="book-success-text">
+        Thank you, <span class="book-conf-highlight" id="book-conf-name"></span>.<br>
+        Your table for <span class="book-conf-highlight" id="book-conf-guests"></span> is reserved for
+        <span class="book-conf-highlight" id="book-conf-date"></span> at
+        <span class="book-conf-highlight" id="book-conf-time"></span>.<br><br>
+        We look forward to welcoming you at <em>Restaurantly</em>. A confirmation call will follow shortly.
+      </p>
+      <button class="book-submit-btn" onclick="document.getElementById('book-success-area').style.display='none'; document.getElementById('book-form-area').style.display='block';" style="margin-top:24px; width:auto; padding:14px 32px;">Make Another Reservation</button>
+    </div><!-- /book-success-area -->
+
+  </div><!-- /book-card -->
+  </div>
+  </div>
+  <script>
+  (function() {
+    var guests = 2;
+    var occasion = '';
+
+    document.getElementById('book-g-minus').addEventListener('click', function() {
+      if (guests > 1) { guests--; document.getElementById('book-g-count').textContent = guests; }
+    });
+    document.getElementById('book-g-plus').addEventListener('click', function() {
+      if (guests < 20) { guests++; document.getElementById('book-g-count').textContent = guests; }
+    });
+
+    document.querySelectorAll('.book-chip').forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        var val = chip.dataset.val;
+        if (occasion === val) {
+          occasion = '';
+          chip.classList.remove('active');
+        } else {
+          document.querySelectorAll('.book-chip').forEach(function(c) { c.classList.remove('active'); });
+          occasion = val;
+          chip.classList.add('active');
+        }
+      });
+    });
+
+    document.getElementById('book-submit').addEventListener('click', function() {
+      var name = document.getElementById('b-name').value.trim();
+      var date = document.getElementById('b-date').value;
+      var time = document.getElementById('b-time').value;
+
+      document.getElementById('b-name').style.borderColor = '';
+      document.getElementById('b-date').style.borderColor = '';
+      document.getElementById('b-time').style.borderColor = '';
+
+      if (!name || !date || !time) {
+        if (!name) document.getElementById('b-name').style.borderColor = '#c9a84c';
+        if (!date) document.getElementById('b-date').style.borderColor = '#c9a84c';
+        if (!time) document.getElementById('b-time').style.borderColor = '#c9a84c';
+        return;
+      }
+
+      var d = new Date(date + 'T00:00:00');
+      var formatted = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+      document.getElementById('book-conf-name').textContent = name;
+      document.getElementById('book-conf-guests').textContent = guests + (guests === 1 ? ' guest' : ' guests');
+      document.getElementById('book-conf-date').textContent = formatted;
+      document.getElementById('book-conf-time').textContent = time;
+
+      document.getElementById('book-form-area').style.display = 'none';
+      document.getElementById('book-success-area').style.display = 'block';
+    });
+  })();
+  </script>
 </section>
 
 <!-- ABOUT -->
@@ -550,7 +286,7 @@
       <div class="gold-divider"></div>
     </div>
     <div class="menu-tabs">
-      <button class="tab-btn active">All</button>
+      <button href=".menu-grid" class="tab-btn active" >All</button>
       <button class="tab-btn">Starters</button>
       <button class="tab-btn">Salads</button>
       <button class="tab-btn">Specials</button>
