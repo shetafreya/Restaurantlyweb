@@ -319,7 +319,7 @@
           <p>A rich and creamy dish with fresh Atlantic lobster, brandy cream sauce, and a crispy cheese crust.</p>
           <div class="special-footer">
             <span class="special-price">$34.95</span>
-            <button class="btn-primary" style="padding: 8px 20px; font-size: 12px;" onclick="openModal(event)">Order Now</button>
+            <button class="btn-primary" style="padding: 8px 20px; font-size: 12px;" onclick="orderNow('Lobster Thermidor', '$34.95')">Order Now</button>
           </div>
         </div>
       </div>
@@ -331,7 +331,7 @@
           <p>Creamy Arborio rice with black truffle, aged Parmesan, and fresh herbs — a luxurious Italian classic.</p>
           <div class="special-footer">
             <span class="special-price">$26.50</span>
-            <button class="btn-primary" style="padding: 8px 20px; font-size: 12px;" onclick="openModal(event)">Order Now</button>
+            <button class="btn-primary" style="padding: 8px 20px; font-size: 12px;" onclick="orderNow('Truffle Risotto', '$26.50')">Order Now</button>
           </div>
         </div>
       </div>
@@ -343,7 +343,7 @@
           <p>Premium A5 Wagyu beef, grilled to perfection, served with roasted vegetables and red wine reduction.</p>
           <div class="special-footer">
             <span class="special-price">$64.00</span>
-            <button class="btn-primary" style="padding: 8px 20px; font-size: 12px;" onclick="openModal(event)">Order Now</button>
+            <button class="btn-primary" style="padding: 8px 20px; font-size: 12px;" onclick="orderNow('Wagyu Beef Steak', '$64.00')">Order Now</button>
           </div>
         </div>
       </div>
@@ -1036,5 +1036,26 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeItemModal();}
 });
 </script>
+
+<div class="order-toast" id="orderToast"></div>
+
+<script>
+function orderNow(itemName, price) {
+  let toast = document.getElementById("orderToast");
+
+  toast.innerHTML = `
+    <strong>${itemName}</strong><br>
+    Price: ${price}<br>
+    Added to order successfully!
+  `;
+
+  toast.style.display = "block";
+
+  setTimeout(function () {
+    toast.style.display = "none";
+  }, 3000);
+}
+</script>
+
 </body>
 </html>
